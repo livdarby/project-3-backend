@@ -30,16 +30,16 @@ export async function getProductById(req: Request, res: Response) {
 }
 
 // ADD A PRODUCT
-// export async function addAFootballer(req: Request, res: Response) {
-//   console.log("POSTING!", req.body);
-//   HERE WE ADD THE CURRENT USER TO THE FOOTBALLER BEFORE ADDING THE FOOTBALLER
-//   req.body.user = res.locals.currentUser;
-//   try {
-//     const addProduct = await Products.create(req.body);
-//     res.send(addProduct);
-//   } catch (e) {
-//     res.send({
-//       messge: "unable to add product. Did you follow the correct format?",
-//     });
-//   }
-// }
+export async function addAProduct(req: Request, res: Response) {
+  console.log("POSTING!", req.body);
+  // HERE WE ADD THE CURRENT USER TO THE PRODUCT BEFORE ADDING THE PRODUCT
+  req.body.user = res.locals.currentUser;
+  try {
+    const addProduct = await Products.create(req.body);
+    res.send(addProduct);
+  } catch (e) {
+    res.send({
+      messge: "unable to add product. Did you follow the correct format?",
+    });
+  }
+}

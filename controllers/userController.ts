@@ -1,6 +1,6 @@
 import { Request, Response } from "express"
-// import User, { checkPasswords, validatePassword } from "../models/users"
-// import { SECRET } from '../config/environment'
+import User, { checkPasswords, validatePassword } from "../models/userModel";
+import { SECRET } from '../config/environment'
 
 // ! import JWT
 import jwt from 'jsonwebtoken'
@@ -26,7 +26,7 @@ export async function login(req: Request, res: Response) {
 
     const user = await User.findOne({ email: req.body.email })
 
-    if (!user) return res.status(401).send({ message: "Login failed" })
+    if (!user) return res.status(401).send({ message: "Login failed - no user" })
 
     const isValidPw = validatePassword(password, user.password)
 

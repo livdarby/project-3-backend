@@ -5,7 +5,7 @@ import Product from "../models/productModel";
 const adminUser = {
   userName: "JamieSellman",
   email: "jamie@jamie.com",
-  password: "jamie200",
+  password: "Jamie200!",
 };
 
 const productData = [
