@@ -48,7 +48,7 @@ export async function addAProduct(req: Request, res: Response) {
 export async function deleteAProduct(req: Request, res: Response) {
   try {
     //Get the footballer to delete
-    const deletedProduct = await Products.findById(req.params._id);
+    const deletedProduct: any = await Products.findById(req.params._id);
     if (!deletedProduct) {
       res.send({ message: "No product found" });
     }
@@ -73,7 +73,7 @@ export async function deleteAProduct(req: Request, res: Response) {
 //UPDATE A PRODUCT
 export async function updateAProduct(req: Request, res: Response) {
   try {
-    const productToUpdate = await Products.findById(req.params._id);
+    const productToUpdate: any = await Products.findById(req.params._id);
     if (!productToUpdate) {
       res.send({ message: "No product found" });
     }

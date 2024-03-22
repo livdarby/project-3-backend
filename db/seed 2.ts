@@ -5,7 +5,7 @@ import Product from "../models/productModel";
 const adminUser = {
   userName: "JamieSellman",
   email: "jamie@jamie.com",
-  password: "Jamie200!",
+  password: "jamie200",
 };
 
 const productData = [
@@ -15,22 +15,6 @@ const productData = [
       "https://i2-prod.liverpool.com/incoming/article26197068.ece/ALTERNATES/s1200c/0_Konat-and-van-Dijk.jpg",
     description: "A wonderful product",
     price: 10,
-    unitsSold: 0,
-  },
-  {
-    image:
-      "https://www.telegraph.co.uk/content/dam/football/2018/05/01/TELEMMGLPICT000161397118_trans_NvBQzQNjv4Bq4aR7DNfHvshBvmGp6VUpaCWNdc-fnFR37rRPeJz9EG8.jpeg?imwidth=680",
-    title: "jurgen",
-    description: "a new product!",
-    price: 5,
-    unitsSold: 0,
-  },
-  {
-    title: "French croissant",
-    image:
-      "https://static01.nyt.com/images/2021/04/07/dining/06croissantsrex1/06croissantsrex1-square640.jpg",
-    description: "Better than the english one",
-    price: 10000,
     unitsSold: 0,
   },
 ];
