@@ -8,8 +8,8 @@ import jwt from 'jsonwebtoken'
 
 export async function signup(req: Request, res: Response) {
   try {
-    console.log(req.body)
-    if (checkPasswords(req.body.password, req.body.passwordConfirmation)) {
+    console.log("req.body", req.body)
+    if (checkPasswords(req.body.password, req.body.confirmPassword)) {
       const user = await User.create(req.body)
       res.send(user)
     } else {
