@@ -1,11 +1,13 @@
 import express from "express"
 import mongoose from "mongoose";
 import router from "./views/Router";
+import mongoSanitize from "express-mongo-sanitize"
 
 const app = express();
 
 
 app.use(express.json());
+app.use(mongoSanitize());
 app.use(router);
 
 async function start() {

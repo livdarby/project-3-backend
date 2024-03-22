@@ -3,8 +3,10 @@ import {
   getProducts,
   getProductById,
   addAProduct,
+  deleteAProduct,
+  updateAProduct,
 } from "../controllers/productController";
-import { signup, login } from "../controllers/userController";
+import { signup, login, getCurrentUser } from "../controllers/userController";
 import secureRoute from "../middleware/secureRoute";
 
 const router = express.Router();
@@ -21,5 +23,11 @@ router.route("/api/products").post(secureRoute, addAProduct);
 router.route("/api/signup").post(signup);
 
 router.route("/api/login").post(login);
+
+router.route("/api/products/:_id").delete(secureRoute, deleteAProduct);
+
+router.route("/api/products/:_id").put(secureRoute, updateAProduct);
+
+router.route("/api/signup").get(secureRoute, getCurrentUser);
 
 export default router;

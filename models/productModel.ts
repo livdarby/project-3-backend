@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-// import uniqueValidator from "mongoose-unique-validator";
+import uniqueValidator from "mongoose-unique-validator";
 
 interface IProduct {
   image: string;
@@ -19,6 +19,6 @@ const productSchema: Schema<IProduct> = new mongoose.Schema<IProduct>({
   user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
 });
 
-// footballSchema.plugin(uniqueValidator);
+productSchema.plugin(uniqueValidator);
 
 export default mongoose.model("Product", productSchema);

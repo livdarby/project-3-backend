@@ -12,16 +12,16 @@ interface IUser {
 }
 
 const usersSchema: Schema<IUser> = new mongoose.Schema<IUser>({
-  userName: { type: String, required: true, unique: true },
+  userName: { type: String, required: [true, "Username must be provided"], unique: true },
   email: {
     type: String,
-    required: true,
+    required: [true, "Email must be provided"],
     unique: true,
     validate: (email: string) => validator.isEmail(email),
   },
   password: {
     type: String,
-    required: true,
+    required: [true, "Password is required to have 8 characters long and must contain 1 uppercase, 1 lowercase, 1 specical character and a number"],
     minlength: 8,
     validate: (password: string) => {
       return validator.isStrongPassword(password, {
@@ -63,6 +63,6 @@ export function checkPasswords(password: string, passwordConfirmation: string) {
 
 usersSchema.plugin(mongooseHidden({ defaultHidden: { password: true } }));
 
-usersSchema.plugin(uniqueValidator);
+usersSchema.plugin(uniqueValidator, {message: "Error, email must be unique."});
 
 export default mongoose.model<IUser>("User", usersSchema);

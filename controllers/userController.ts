@@ -1,6 +1,7 @@
 import { Request, Response } from "express"
 import User, { checkPasswords, validatePassword } from "../models/userModel";
 import { SECRET } from '../config/environment'
+import formatValidationError from "../errors/validation";
 
 // ! import JWT
 import jwt from 'jsonwebtoken'
@@ -12,11 +13,11 @@ export async function signup(req: Request, res: Response) {
       const user = await User.create(req.body)
       res.send(user)
     } else {
-      res.send({ message: "Passwords do not match." })
+      res.send({errors: {password: "Passwords do not match."} })
     }
   } catch (e) {
     console.log(e)
-    res.send({ message: "There was an error" })
+    res.send({ message: "There was an error.", errors: formatValidationError(e)})
   }
 }
 
@@ -45,5 +46,13 @@ export async function login(req: Request, res: Response) {
     res.send(req.body)
   } catch (e) {
 
+  }
+}
+
+export async function getCurrentUser (req: Request, res: Response) {
+  try{
+    res.status(200).send(res.locals.currentUser)
+  } catch (e) {
+    res.status(500).send({message: "There was an error please try again later."})
   }
 }

@@ -43,3 +43,60 @@ export async function addAProduct(req: Request, res: Response) {
     });
   }
 }
+
+//delete a product
+export async function deleteAProduct(req: Request, res: Response) {
+  try {
+    //Get the footballer to delete
+    const deletedProduct = await Products.findById(req.params._id);
+    if (!deletedProduct) {
+      res.send({ message: "No product found" });
+    }
+    console.log("CurrentUserID: ", res.locals.currentUser._id);
+    console.log("Player to delete: ", deletedProduct);
+    console.log("PlayerUserID: ", deletedProduct?.user);
+
+    if (res.locals.currentUser._id.equals(deletedProduct?.user)) {
+      const productID = req.params._id;
+      const deletedProduct = await Products.findByIdAndDelete(productID);
+      return res.send(deletedProduct);
+    } else {
+      return res.send({
+        message: "You are not authorized to delete this product.",
+      });
+    }
+  } catch (e) {
+    res.send({ message: "There was a problem deleting your product." });
+  }
+}
+
+//UPDATE A PRODUCT
+export async function updateAProduct(req: Request, res: Response) {
+  try {
+    const productToUpdate = await Products.findById(req.params._id);
+    if (!productToUpdate) {
+      res.send({ message: "No product found" });
+    }
+    if (res.locals.currentUser._id.equals(productToUpdate?.user)) {
+      const update = req.body;
+      //update the player
+      const updatedProduct = await Products.findByIdAndUpdate(
+        productToUpdate,
+        update,
+        {
+          //if new true isnt here, we would send the original product back to user, not the updated product
+          new: true,
+        }
+      );
+      res.send(updatedProduct);
+    } else {
+      return res.send({
+        message: "You are not authorized to update this product.",
+      });
+    }
+  } catch (e) {
+    res.send({
+      message: "Player not found. Did you provide a valid productID?",
+    });
+  }
+}
