@@ -128,3 +128,23 @@ export async function updateUnitsSold(req: Request, res: Response) {
     });
   }
 }
+// GET ALL CATEGORIES :
+export const getAllCategories = async (req: Request, res: Response) => {
+  try {
+    const categories = await Products.distinct("category");
+    res.send(categories);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Server error");
+  }
+};
+
+// GET 1 CATEGORIES :
+// export async function getOneCategory(req: Request, res: Response) {
+//   const findCategory = req.params.category;
+//   console.log(req.params);
+//   // console.log(selectedField);
+//   const productField = await Products.findOne({ category: findCategory });
+//   res.send(productField);
+//   console.log(`this is the last console ${productField.category}`);
+// }
