@@ -20,7 +20,7 @@ export async function getProductById(req: Request, res: Response) {
   try {
     // in req params ._id needs to match the id above to work
     const idNumber = req.params._id;
-    console.log(idNumber);
+    console.log("single id",idNumber);
     const foundProduct = await Products.findById(idNumber);
     res.send(foundProduct);
   } catch (error) {
@@ -98,5 +98,22 @@ export async function updateAProduct(req: Request, res: Response) {
     res.send({
       message: "Player not found. Did you provide a valid productID?",
     });
+  }
+}
+
+//GET PRODUCT BY CATEGORY
+export async function getProductsByCategory(req: Request, res: Response) {
+  console.log("hello")  
+  try {
+      console.log("hello")
+    // in req params ._id needs to match the id above to work
+    const productCategory = req.params.category;
+    console.log("here", req.params);
+    const foundProduct = await Products.find({category: productCategory});
+    res.send(foundProduct);
+    console.log("found category", foundProduct)
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({message: "Product not found. Did you provide a valid product ID"});
   }
 }
