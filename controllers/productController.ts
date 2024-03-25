@@ -129,7 +129,7 @@ export async function updateUnitsSold(req: Request, res: Response) {
   }
 }
 // GET ALL CATEGORIES :
-export const getAllCategories = async (req: Request, res: Response) => {
+export async function getAllCategories(req: Request, res: Response) {
   try {
     const categories = await Products.distinct("category");
     res.send(categories);
@@ -137,14 +137,28 @@ export const getAllCategories = async (req: Request, res: Response) => {
     console.error(error);
     res.status(500).send("Server error");
   }
-};
+}
 
-// GET 1 CATEGORIES :
-// export async function getOneCategory(req: Request, res: Response) {
-//   const findCategory = req.params.category;
-//   console.log(req.params);
-//   // console.log(selectedField);
-//   const productField = await Products.findOne({ category: findCategory });
-//   res.send(productField);
-//   console.log(`this is the last console ${productField.category}`);
-// }
+// Get ALL products/Seller :
+export async function getProductsbySeller(req: Request, res: Response) {
+  try {
+    const sellerId = req.params.userId;
+    console.log(sellerId);
+    // Validate seller
+    if (!sellerId) {
+      return res.status(400).send({ message: "Please provide a Seller ID" });
+    }
+
+    // Get the products if they exist on seller
+    const products = await Products.find({ user: sellerId });
+
+    if (products.length === 0) {
+      return res.status(404).send({ message: "This seller has no products !" });
+    }
+    res.send(products);
+    console.log(products);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ message: "error while getting products" });
+  }
+}

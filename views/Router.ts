@@ -6,8 +6,8 @@ import {
   deleteAProduct,
   updateAProduct,
   getAllCategories,
-  // getOneCategory,
-  updateUnitsSold
+  updateUnitsSold,
+  getProductsbySeller,
 } from "../controllers/productController";
 import { signup, login, getCurrentUser } from "../controllers/userController";
 import secureRoute from "../middleware/secureRoute";
@@ -33,14 +33,14 @@ router.route("/api/products/:_id").delete(secureRoute, deleteAProduct);
 // Get All Product Categories
 router.route("/api/categories").get(getAllCategories);
 
-// // Get 1 product Category
-// router.route("/api/:category").get(getOneCategory);
-
 // SELLER ------------------------
 // Seller SignUp
 router.route("/api/signup").post(signup);
 // Seller LogIn
 router.route("/api/login").post(login);
+
+// Get ALL Products for EACH USER
+router.route("/api/getProducts/:userId").get(getProductsbySeller);
 
 // Get Current User
 router.route("/api/signup").get(secureRoute, getCurrentUser);
