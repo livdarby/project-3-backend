@@ -1,5 +1,4 @@
-
-import Products from "../models/productModel"
+import Products from "../models/productModel";
 import { Request, Response } from "express";
 
 //GET ALL PRODUCTS
@@ -25,7 +24,9 @@ export async function getProductById(req: Request, res: Response) {
     res.send(foundProduct);
   } catch (error) {
     console.log(error);
-    res.status(404).json({message: "Product not found. Did you provide a valid product ID"});
+    res.status(404).json({
+      message: "Product not found. Did you provide a valid product ID",
+    });
   }
 }
 
@@ -100,3 +101,24 @@ export async function updateAProduct(req: Request, res: Response) {
     });
   }
 }
+
+// GET ALL CATEGORIES :
+export const getAllCategories = async (req: Request, res: Response) => {
+  try {
+    const categories = await Products.distinct("category");
+    res.send(categories);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Server error");
+  }
+};
+
+// GET 1 CATEGORIES :
+// export async function getOneCategory(req: Request, res: Response) {
+//   const findCategory = req.params.category;
+//   console.log(req.params);
+//   // console.log(selectedField);
+//   const productField = await Products.findOne({ category: findCategory });
+//   res.send(productField);
+//   console.log(`this is the last console ${productField.category}`);
+// }
