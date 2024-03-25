@@ -5,6 +5,7 @@ import {
   addAProduct,
   deleteAProduct,
   updateAProduct,
+  updateUnitsSold
 } from "../controllers/productController";
 import { signup, login, getCurrentUser } from "../controllers/userController";
 import secureRoute from "../middleware/secureRoute";
@@ -29,5 +30,7 @@ router.route("/api/products/:_id").delete(secureRoute, deleteAProduct);
 router.route("/api/products/:_id").put(secureRoute, updateAProduct);
 
 router.route("/api/signup").get(secureRoute, getCurrentUser);
+
+router.route("/api/unitsSold/:_id").post(updateUnitsSold);
 
 export default router;

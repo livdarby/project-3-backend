@@ -1,5 +1,4 @@
-
-import Products from "../models/productModel"
+import Products from "../models/productModel";
 import { Request, Response } from "express";
 
 //GET ALL PRODUCTS
@@ -25,7 +24,9 @@ export async function getProductById(req: Request, res: Response) {
     res.send(foundProduct);
   } catch (error) {
     console.log(error);
-    res.status(404).json({message: "Product not found. Did you provide a valid product ID"});
+    res.status(404).json({
+      message: "Product not found. Did you provide a valid product ID",
+    });
   }
 }
 
@@ -97,6 +98,33 @@ export async function updateAProduct(req: Request, res: Response) {
   } catch (e) {
     res.send({
       message: "Player not found. Did you provide a valid productID?",
+    });
+  }
+}
+
+export async function updateUnitsSold(req: Request, res: Response) {
+  try {
+    const productToUpdate: any = await Products.findById(req.params._id);
+    if (!productToUpdate) {
+      res.send({
+        message: "Product not found. Did you provide a valid productID?",
+      });
+    } else {
+      const update = req.body;
+      console.log(update);
+      const updatedProduct = await Products.findByIdAndUpdate(
+        productToUpdate,
+        update,
+        {
+          //if new true isnt here, we would send the original product back to user, not the updated product
+          new: true,
+        }
+      );
+      res.send(updatedProduct);
+    }
+  } catch (e) {
+    res.send({
+      message: "Error",
     });
   }
 }
