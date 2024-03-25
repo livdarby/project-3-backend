@@ -16,6 +16,7 @@ const productData = [
     description: "A wonderful product",
     price: 10,
     unitsSold: 0,
+    category: "pastries",
   },
   {
     image:
@@ -24,6 +25,7 @@ const productData = [
     description: "a new product!",
     price: 5,
     unitsSold: 0,
+    category: "pastries",
   },
   {
     title: "French croissant",
@@ -32,6 +34,7 @@ const productData = [
     description: "Better than the english one",
     price: 10000,
     unitsSold: 0,
+    category: "pastries",
   },
 ];
 
