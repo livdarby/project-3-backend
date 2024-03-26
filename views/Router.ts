@@ -44,7 +44,7 @@ router.route("/api/getProducts/:userId").get(getProductsbySeller);
 
 // Get Current User
 router.route("/api/signup").get(secureRoute, getCurrentUser);
-
+// get Units sold
 router.route("/api/unitsSold/:_id").post(updateUnitsSold);
 
 export default router;
