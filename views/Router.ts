@@ -5,6 +5,7 @@ import {
   addAProduct,
   deleteAProduct,
   updateAProduct,
+  getProductsbySeller,
   getProductsByCategory,
   getAllCategories,
   // getOneCategory,
@@ -34,6 +35,17 @@ router.route("/api/products/:_id").delete(secureRoute, deleteAProduct);
 // Get All Product Categories
 router.route("/api/categories").get(getAllCategories);
 
+// SELLER ------------------------
+// Seller SignUp
+// Edit 1 Product
+router.route("/api/products/:_id").put(secureRoute, updateAProduct);
+
+// Delete Product
+router.route("/api/products/:_id").delete(secureRoute, deleteAProduct);
+
+// Get All Product Categories
+router.route("/api/categories").get(getAllCategories);
+
 // // Get 1 product Category
 router.route("/api/:category").get(getProductsByCategory);
 
@@ -43,7 +55,12 @@ router.route("/api/signup").post(signup);
 // Seller LogIn
 router.route("/api/login").post(login);
 
+// Get ALL Products for EACH USER
+router.route("/api/getProducts/:userId").get(getProductsbySeller);
+
 // Get Current User
 router.route("/api/signup").get(secureRoute, getCurrentUser);
+
+router.route("/api/unitsSold/:_id").post(updateUnitsSold);
 
 export default router;
