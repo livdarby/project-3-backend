@@ -47,7 +47,7 @@ router.route("/api/products/:_id").delete(secureRoute, deleteAProduct);
 router.route("/api/categories").get(getAllCategories);
 
 // // Get 1 product Category
-router.route("/api/:category").get(getProductsByCategory);
+router.route("/api/products/search/:category").get(getProductsByCategory);
 
 // SELLER ------------------------
 // Seller SignUp
