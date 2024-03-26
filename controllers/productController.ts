@@ -1,11 +1,13 @@
 import Products from "../models/productModel";
 import { Request, Response } from "express";
+import Users from "../models/userModel";
 
 //GET ALL PRODUCTS
 export async function getProducts(req: Request, res: Response) {
   try {
     const allProducts = await Products.find();
     res.send(allProducts);
+    console.log(allProducts);
   } catch (e) {
     res.send({
       message:
@@ -19,7 +21,7 @@ export async function getProductById(req: Request, res: Response) {
   try {
     // in req params ._id needs to match the id above to work
     const idNumber = req.params._id;
-    console.log("single id",idNumber);
+    console.log("single id", idNumber);
     const foundProduct = await Products.findById(idNumber);
     res.send(foundProduct);
   } catch (error) {
@@ -104,18 +106,20 @@ export async function updateAProduct(req: Request, res: Response) {
 
 //GET PRODUCT BY CATEGORY
 export async function getProductsByCategory(req: Request, res: Response) {
-  console.log("hello")  
+  console.log("hello");
   try {
-      console.log("hello")
+    console.log("hello");
     // in req params ._id needs to match the id above to work
     const productCategory = req.params.category;
     console.log("here", req.params);
-    const foundProduct = await Products.find({category: productCategory});
+    const foundProduct = await Products.find({ category: productCategory });
     res.send(foundProduct);
-    console.log("found category", foundProduct)
+    console.log("found category", foundProduct);
   } catch (error) {
     console.log(error);
-    res.status(404).json({message: "Product not found. Did you provide a valid product ID"});
+    res.status(404).json({
+      message: "Product not found. Did you provide a valid product ID",
+    });
   }
 }
 export async function updateUnitsSold(req: Request, res: Response) {
@@ -176,5 +180,18 @@ export async function getProductsbySeller(req: Request, res: Response) {
   } catch (error) {
     console.error(error);
     res.status(500).send({ message: "error while getting products" });
+  }
+}
+
+export async function findSellerName(req: Request, res: Response) {
+  try {
+    const productId = req.params._id;
+    const product: any = await Products.findById(productId);
+    const sellerToFind = product.user;
+    const foundSeller = await Users.findById(sellerToFind);
+    console.log(foundSeller);
+    res.send(foundSeller);
+  } catch (e) {
+    res.status(500).send({ message: "Error" });
   }
 }

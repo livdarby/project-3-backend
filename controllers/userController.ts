@@ -51,6 +51,7 @@ export async function login(req: Request, res: Response) {
 
 export async function getCurrentUser (req: Request, res: Response) {
   try{
+    console.log('current user:', res.locals.currentUser);
     res.status(200).send(res.locals.currentUser)
   } catch (e) {
     res.status(500).send({message: "There was an error please try again later."})
