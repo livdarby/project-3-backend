@@ -10,7 +10,8 @@ import {
   getAllCategories,
   // getOneCategory,
   updateUnitsSold,
-  findSellerName
+  findSellerName,
+  postAReview,
 } from "../controllers/productController";
 import { signup, login, getCurrentUser } from "../controllers/userController";
 import secureRoute from "../middleware/secureRoute";
@@ -65,5 +66,7 @@ router.route("/api/signup").get(secureRoute, getCurrentUser);
 router.route("/api/unitsSold/:_id").post(updateUnitsSold);
 
 router.route("/api/findSellerName/:_id").get(findSellerName);
+
+router.route("/api/reviews/:_id").put(postAReview);
 
 export default router;

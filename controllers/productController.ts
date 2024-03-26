@@ -195,3 +195,36 @@ export async function findSellerName(req: Request, res: Response) {
     res.status(500).send({ message: "Error" });
   }
 }
+
+export async function postAReview(req: Request, res: Response) {
+  try {
+    const productId = req.params._id;
+    const productToUpdate: any = await Products.findById(productId);
+    const existingReviews = productToUpdate.reviews;
+    console.log("existing reviews", existingReviews);
+    // const reviewToAdd = req.body;
+    const today = new Date();
+    req.body.reviews.map((review: any) => {
+      return (review.date = today.toLocaleDateString());
+    });
+    req.body.reviews.map((review: any) => {
+      return (review.time = today.toLocaleTimeString());
+    });
+    // req.body.reviews.date = today.toLocaleDateString();
+    // req.body.reviews.time = today.toLocaleTimeString();
+    console.log(req.body);
+    const newListOfReviews = [...req.body.reviews, ...existingReviews];
+    console.log("new list of reviews", newListOfReviews);
+    req.body.reviews = newListOfReviews;
+    const updatedProduct = await Products.findByIdAndUpdate(
+      productToUpdate,
+      req.body,
+      {
+        new: true,
+      }
+    );
+    res.send(updatedProduct);
+  } catch (e) {
+    res.status(500).send({ message: "Error" });
+  }
+}
