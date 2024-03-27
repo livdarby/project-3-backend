@@ -64,6 +64,7 @@ router.route("/api/getProducts/:userId").get(getProductsbySeller);
 // Get Current User
 router.route("/api/signup").get(secureRoute, getCurrentUser);
 
+// Get Units Sold / Product
 router.route("/api/unitsSold/:_id").post(updateUnitsSold);
 
 router.route("/api/findSellerName/:_id").get(findSellerName);
