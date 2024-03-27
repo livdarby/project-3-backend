@@ -13,7 +13,14 @@ export async function signup(req: Request, res: Response) {
       const user = await User.create(req.body);
       res.send(user);
     } else {
-      res.status(400).send({ errors: { password: "Passwords do not match." } });
+      res
+        .status(400)
+        .send({
+          errors: {
+            password:
+              "Hmm... appears you're having issues typing 🧐 please try again...",
+          },
+        });
     }
   } catch (e) {
     console.log(e);

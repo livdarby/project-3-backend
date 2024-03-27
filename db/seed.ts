@@ -27,7 +27,23 @@ const productData = [
     price: 39.99,
     unitsSold: 0,
     category: "Chocolate",
-    review: [exampleReview],
+    reviews: [
+      {
+        name: "An admirer",
+        review:
+          "The chocolates were fine but the real star of the show is this website!!! Kudos to the dev team",
+        date: today.toLocaleDateString(),
+        time: today.toLocaleTimeString(),
+      },
+      exampleReview,
+      {
+        name: "Irene Jardin",
+        review:
+          "Ok to start my box arrived in mint condition, unfortunately mint condition is about the only flavour this box contained. These are not bad chocolates , actually they are beautifully made, they just lack variety, and with chocolate slabs taking up a quarter of the box, I can't say they are value for money.. ",
+        date: today.toLocaleDateString(),
+        time: today.toLocaleTimeString(),
+      },
+    ],
   },
   {
     image:
@@ -46,6 +62,15 @@ const productData = [
     price: 0.9,
     unitsSold: 0,
     category: "Pastries",
+    reviews: [
+      {
+        name: "Dom",
+        review:
+          "But all croissants are overpriced considering what is in them. Imagine if you hit it with a hammer, you would then see what you actually paid for, and find it is very little. But enjoyable to eat, makes you want a few more as not filling.",
+        date: today.toLocaleDateString(),
+        time: today.toLocaleTimeString(),
+      },
+    ],
   },
   {
     title: "Cheese Plate",
@@ -86,6 +111,14 @@ const productData = [
     price: 5.0,
     unitsSold: 0,
     category: "Cheese",
+    reviews: [
+      {
+        name: "Karen",
+        review: "Poor compared to English Somerset brie",
+        date: today.toLocaleDateString(),
+        time: today.toLocaleTimeString(),
+      },
+    ],
   },
   {
     title: "Mint Choc",

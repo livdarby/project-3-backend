@@ -81,7 +81,8 @@ usersSchema.post("validate", function (error: any, _doc: any, next: any): any {
     error.errors.password &&
     error.errors.password.kind === "user defined"
   ) {
-    error.errors.password.message = "Invalid password. Please try again.";
+    error.errors.password.message =
+      "You didn't check the password requirements did you... please try again 🙄";
   }
   next(error);
 });
