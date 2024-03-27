@@ -18,6 +18,7 @@ import secureRoute from "../middleware/secureRoute";
 
 const router = express.Router();
 
+
 // PRODUCTS ---------------------
 // getting all the product data
 router.route("/api/products").get(getProducts);

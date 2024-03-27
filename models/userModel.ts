@@ -14,12 +14,11 @@ interface IUser {
 const usersSchema: Schema<IUser> = new mongoose.Schema<IUser>({
   userName: {
     type: String,
-    required: [true, "Username must be provided"],
-    unique: true,
+    required: [true, "You must provide a valid username"],
   },
   email: {
     type: String,
-    required: [true, "Email must be provided"],
+    required: [true, "You must provide a valid email address"],
     unique: true,
     validate: (email: string) => validator.isEmail(email),
   },
@@ -27,7 +26,7 @@ const usersSchema: Schema<IUser> = new mongoose.Schema<IUser>({
     type: String,
     required: [
       true,
-      "Password is required to have 8 characters long and must contain 1 uppercase, 1 lowercase, 1 specical character and a number",
+      "Password is required to have 8 characters long and must contain at least 1 uppercase, 1 lowercase, 1 specical character and a number",
     ],
     minlength: 8,
     validate: (password: string) => {
@@ -39,6 +38,8 @@ const usersSchema: Schema<IUser> = new mongoose.Schema<IUser>({
         minNumbers: 1,
       });
     },
+    message:
+      "Password must contain at least 1 uppercase, 1 lowercase, 1 special character, and a number",
   },
   unit: { Number },
 });
@@ -71,7 +72,29 @@ export function checkPasswords(password: string, confirmPassword: string) {
 usersSchema.plugin(mongooseHidden({ defaultHidden: { password: true } }));
 
 usersSchema.plugin(uniqueValidator, {
-  message: "Error, email must be unique.",
+  message: "You must provide a new email address",
+});
+
+usersSchema.post("validate", function (error: any, _doc: any, next: any): any {
+  if (
+    error.errors &&
+    error.errors.password &&
+    error.errors.password.kind === "user defined"
+  ) {
+    error.errors.password.message = "Invalid password. Please try again.";
+  }
+  next(error);
+});
+
+usersSchema.post("validate", function (error: any, _doc: any, next: any): any {
+  if (
+    error.errors &&
+    error.errors.email &&
+    error.errors.email.kind === "user defined"
+  ) {
+    error.errors.email.message = "Invalid email. Please try again.";
+  }
+  next(error);
 });
 
 export default mongoose.model<IUser>("User", usersSchema);
