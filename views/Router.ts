@@ -10,7 +10,8 @@ import {
   getAllCategories,
   // getOneCategory,
   updateUnitsSold,
-  findSellerName
+  findSellerName,
+  postAReview,
 } from "../controllers/productController";
 import { signup, login, getCurrentUser } from "../controllers/userController";
 import secureRoute from "../middleware/secureRoute";
@@ -62,8 +63,11 @@ router.route("/api/getProducts/:userId").get(getProductsbySeller);
 // Get Current User
 router.route("/api/signup").get(secureRoute, getCurrentUser);
 
+// Get Units Sold / Product
 router.route("/api/unitsSold/:_id").post(updateUnitsSold);
 
 router.route("/api/findSellerName/:_id").get(findSellerName);
+
+router.route("/api/reviews/:_id").put(postAReview);
 
 export default router;
