@@ -8,7 +8,7 @@ import jwt from "jsonwebtoken";
 
 export async function signup(req: Request, res: Response) {
   try {
-    console.log("req.body", req.body);
+    // console.log("req.body", req.body);
     if (checkPasswords(req.body.password, req.body.confirmPassword)) {
       const user = await User.create(req.body);
       res.send(user);
@@ -16,7 +16,7 @@ export async function signup(req: Request, res: Response) {
       res.status(400).send({ errors: { password: "Passwords do not match." } });
     }
   } catch (e) {
-    console.log(e);
+    // console.log(e);
     res.status(400).send({
       message: "There was an error.",
       errors: formatValidationError(e),
@@ -56,7 +56,7 @@ export async function login(req: Request, res: Response) {
 
 export async function getCurrentUser(req: Request, res: Response) {
   try {
-    console.log("current user:", res.locals.currentUser);
+    // console.log("current user:", res.locals.currentUser);
     res.status(200).send(res.locals.currentUser);
   } catch (e) {
     res

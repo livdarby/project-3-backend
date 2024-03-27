@@ -29,7 +29,7 @@ export default function secureRoute(
     const jwtPayload = payload as JWTPayload;
     const userId = jwtPayload.userId;
 
-    console.log(userId);
+    // console.log(userId);
 
     const user = await Users.findById(userId);
 
