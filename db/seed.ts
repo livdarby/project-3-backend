@@ -8,6 +8,15 @@ const adminUser = {
   password: "Jamie200!",
 };
 
+const today = new Date();
+
+const exampleReview = {
+  name: "A previous purchaser",
+  review: "This was a really great product!",
+  date: today.toLocaleDateString(),
+  time: today.toLocaleTimeString(),
+};
+
 const productData = [
   {
     title: "Chocolate Box",
@@ -18,6 +27,7 @@ const productData = [
     price: 39.99,
     unitsSold: 0,
     category: "Chocolate",
+    review: [exampleReview],
   },
   {
     image:

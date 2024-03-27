@@ -1,13 +1,17 @@
-import express from "express";
+import express, { Router } from "express";
 import {
   getProducts,
   getProductById,
   addAProduct,
   deleteAProduct,
   updateAProduct,
-  getAllCategories,
-  updateUnitsSold,
   getProductsbySeller,
+  getProductsByCategory,
+  getAllCategories,
+  // getOneCategory,
+  updateUnitsSold,
+  findSellerName,
+  postAReview,
 } from "../controllers/productController";
 import { signup, login, getCurrentUser } from "../controllers/userController";
 import secureRoute from "../middleware/secureRoute";
@@ -35,6 +39,20 @@ router.route("/api/categories").get(getAllCategories);
 
 // SELLER ------------------------
 // Seller SignUp
+// Edit 1 Product
+router.route("/api/products/:_id").put(secureRoute, updateAProduct);
+
+// Delete Product
+router.route("/api/products/:_id").delete(secureRoute, deleteAProduct);
+
+// Get All Product Categories
+router.route("/api/categories").get(getAllCategories);
+
+// // Get 1 product Category
+router.route("/api/products/search/:category").get(getProductsByCategory);
+
+// SELLER ------------------------
+// Seller SignUp
 router.route("/api/signup").post(signup);
 // Seller LogIn
 router.route("/api/login").post(login);
@@ -47,5 +65,9 @@ router.route("/api/signup").get(secureRoute, getCurrentUser);
 
 // Get Units Sold / Product
 router.route("/api/unitsSold/:_id").post(updateUnitsSold);
+
+router.route("/api/findSellerName/:_id").get(findSellerName);
+
+router.route("/api/reviews/:_id").put(postAReview);
 
 export default router;

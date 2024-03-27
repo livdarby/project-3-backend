@@ -1,6 +1,13 @@
 import mongoose, { Schema } from "mongoose";
 import uniqueValidator from "mongoose-unique-validator";
 
+interface IReview {
+  review: string;
+  name: string;
+  date: () => Date;
+  time: () => Date;
+}
+
 interface IProduct {
   image: string;
   title: string;
@@ -9,6 +16,7 @@ interface IProduct {
   unitsSold: number;
   user: mongoose.Schema.Types.ObjectId;
   category: string;
+  reviews?: Array<IReview>;
 }
 
 const productSchema: Schema<IProduct> = new mongoose.Schema<IProduct>({
@@ -19,6 +27,7 @@ const productSchema: Schema<IProduct> = new mongoose.Schema<IProduct>({
   unitsSold: { type: Number, required: true },
   user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
   category: { type: String, required: true },
+  reviews: {type: Array<IReview>, required: false}
 });
 
 productSchema.plugin(uniqueValidator);
