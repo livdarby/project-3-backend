@@ -23,7 +23,7 @@ const productData = [
     image:
       "https://media.istockphoto.com/id/1341080014/fr/photo/bo%C3%AEte-avec-de-d%C3%A9licieux-bonbons-au-chocolat-sur-une-table-noire-%C3%A0-plat-espace-pour-le-texte.jpg?s=612x612&w=0&k=20&c=1Ut1a3JYtH18qURf7NGqpkqVWLSoJIRbhj2NvG9la68=",
     description:
-      "Delicious assortment of 24 chocolates, ranging from dark chocolate to white. Life is like a box of chocolate. Get prepared to be delighted",
+      "Dive into our luxurious assortment of 24 chocolates, offering a journey from the deep, intense flavors of dark chocolate to the creamy delicacies of white chocolate. Inspired by the notion that life is akin to a box of chocolates, each piece is crafted to surprise and delight your senses. Prepare for an enchanting experience with every bite.",
     price: 39.99,
     unitsSold: 0,
     category: "Chocolate",
@@ -49,7 +49,8 @@ const productData = [
     image:
       "https://upload.wikimedia.org/wikipedia/commons/c/cd/Macarons%2C_French_made_mini_cakes.JPG",
     title: "Macaron Box",
-    description: "a new product!",
+    description:
+      "Indulge in our exquisite box of Luxury Macarons, featuring an assortment of flavors that cater to every palate. From the vibrant tang of Lemon to the rich indulgence of Chocolate, the sweet bliss of Strawberry, and the exotic aroma of Pistachio, each macaron promises a burst of sophisticated taste and a silky-smooth texture. Perfect for gifting or treating yourself, this collection is a celebration of elegance and flavor.",
     price: 25.5,
     unitsSold: 0,
     category: "Pastries",
@@ -58,7 +59,8 @@ const productData = [
     title: "Croissant",
     image:
       "https://static01.nyt.com/images/2021/04/07/dining/06croissantsrex1/06croissantsrex1-square640.jpg",
-    description: "Better than the english one",
+    description:
+      "Savor the unparalleled blend of buttery richness and chocolate decadence with our Gourmet Chocolate Croissant. Each croissant is meticulously handcrafted, marrying the delicate layers of a traditional French croissant with luscious, melt-in-your-mouth chocolate. Perfect for a luxurious breakfast or a sumptuous snack, this pastry is a testament to the art of French baking. Elevate your taste experience with every bite.",
     price: 0.9,
     unitsSold: 0,
     category: "Pastries",
@@ -87,7 +89,7 @@ const productData = [
     image:
       "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Pain_au_chocolat_Luc_Viatour.jpg/640px-Pain_au_chocolat_Luc_Viatour.jpg",
     description:
-      "A delicious French Pastry that offers the deliciousness of a croissant with the gourmandise of the chocolate. What better mix ?",
+      "A delectable French pastry that combines the flakiness of a croissant with the indulgence of chocolate. What better combination could there be?",
     price: 0.9,
     unitsSold: 0,
     category: "Pastries",
@@ -182,11 +184,11 @@ async function seed() {
 
   // ! Before we seed movies, we want to seed a user.
   const user = await Users.create(adminUser);
-  console.log("Admin user is seed:", user);
+  // console.log("Admin user is seed:", user);
   productData.forEach((product: any) => (product.user = user._id));
 
   const products = await Product.create(productData);
-  console.log(products);
+  // console.log(products);
 
   console.log("Disconnecting..");
   await mongoose.disconnect();

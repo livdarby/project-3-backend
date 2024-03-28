@@ -51,9 +51,9 @@ const usersSchema: Schema<IUser> = new mongoose.Schema<IUser>({
 usersSchema.pre("save", function hashPassword(next) {
   // ! "this" is our document, it will have our email, password, and username available.
   // ! hashSync is a bcrypt function, it takes our password, plus a salt, and creates a unique hash.
-  console.log("here is the password", this.password);
+  // console.log("here is the password", this.password);
   this.password = bcrypt.hashSync(this.password, bcrypt.genSaltSync());
-  console.log("here is the updated password", this.password);
+  // console.log("here is the updated password", this.password);
   // ! Call next() to tell mongoose we're done.
   next();
 });
