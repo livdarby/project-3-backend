@@ -20,7 +20,6 @@ export default function secureRoute(
       return res.status(401).json({ message: "Unauthorized" });
     }
 
-    // The user is a valid user
 
     interface JWTPayload {
       userId: string;
@@ -29,16 +28,13 @@ export default function secureRoute(
     const jwtPayload = payload as JWTPayload;
     const userId = jwtPayload.userId;
 
-    // console.log(userId);
 
     const user = await Users.findById(userId);
 
     if (!user) return res.status(401).json({ message: "Unauthorized" });
 
-    // ! Attach the currentUser to the response, before we call next()
     res.locals.currentUser = user;
 
-    // ? 2) We also need the user who originally posted the movie.
 
     next();
   });
