@@ -48,7 +48,7 @@ export async function login(req: Request, res: Response) {
         { expiresIn: "24h" } 
       );
 
-      res.send({ message: "Login successful", token }); // ! Add the token to the response
+      res.send({ message: "Login successful", token }); 
     } else {
       res.status(401).send({ message: "Login failed. Please try again" });
     }
